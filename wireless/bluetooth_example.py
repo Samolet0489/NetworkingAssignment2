@@ -16,7 +16,7 @@
 #    pip install ..\pybluez\dist\PyBluez-0.22-cp36-cp36m-win_amd64.whl
 # 
 
-import bluetooth
+from pybluez import bluetooth
 
 nearby_devices = bluetooth.discover_devices(duration=8, lookup_names=True,
                                             flush_cache=True, lookup_class=False)
