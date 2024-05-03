@@ -38,7 +38,7 @@ class CustomHttpServer(BaseHTTPRequestHandler):
         :return:
         """
         if self.path == '/example':
-            with open('example.html', 'rb') as file:
+            with open('./http/example.html', 'rb') as file:
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
