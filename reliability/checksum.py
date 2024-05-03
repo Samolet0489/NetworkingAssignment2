@@ -26,6 +26,9 @@ def calculate_checksum8(bytes: bytes) -> bytes:
     return checksum
 
 
+
+#TODO: I soved this in the TODO check it when team8 comes back
+
 def calculate_checksum16(bytes: bytes) -> bytes:
     """
     Calculates a checksum from a byte array (16 bits).
