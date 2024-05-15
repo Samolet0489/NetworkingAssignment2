@@ -5,6 +5,13 @@ import socket
 import ssl
 
 
+# potential problems (This is Something being TESTED 6am 150524, testing passed)
+def create_connection(address):
+    conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    conn.connect(address)
+    return conn
+
+
 class HttpConnectionHelper:
     """
     Helper class for establishing a TCP connection

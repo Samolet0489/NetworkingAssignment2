@@ -37,14 +37,14 @@ class CustomHttpServer(BaseHTTPRequestHandler):
         Handling of GET requests
         :return:
         """
+        # print(f"Received GET request for {self.path}")
         if self.path == '/example':
-            with open('./http/example.html', 'rb') as file:
+            with open('example.html', 'rb') as file:  # Corrected file path
                 self.send_response(200)
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
                 self.wfile.write(file.read())
-                file.close()
-                return
+                # print("Served example.html")
         else:
             try:
                 page = open(self.path[1:], 'rb')
@@ -52,14 +52,14 @@ class CustomHttpServer(BaseHTTPRequestHandler):
                 self.send_header('Content-type', 'text/html')
                 self.end_headers()
                 self.wfile.write(page.read())
-                page.close()
+                # print(f"Served {self.path[1:]}")
             except OSError:
                 self.send_error(404, 'Not found')
-
+                # print(f"File not found: {self.path[1:]}")
 
 if __name__ == "__main__":
     ws = HTTPServer(("127.0.0.1", 80), CustomHttpServer)
-    print(f"Started server on port 80")
+    print("Started server on port 80")
 
     try:
         ws.serve_forever()
