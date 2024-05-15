@@ -128,4 +128,3 @@ if __name__ == "__main__":
 
         #  after starting the server run:
         #  python webbrowser.py localhost/example
-g
