@@ -67,6 +67,9 @@ def display_page(host, path):
     if links:
         print("\nLinks:")
         for i, (text, link) in enumerate(links):
+            # Remove "http/" prefix if present
+            if link.startswith("http/"):
+                link = link[5:]
             print(f"[{i + 1}] {text} -> {link}")
     else:
         print("No links found on this page.")
@@ -122,3 +125,7 @@ if __name__ == "__main__":
         print("Usage: python webbrowser.py <URL>")
     else:
         main(sys.argv[1])
+
+        #  after starting the server run:
+        #  python webbrowser.py localhost/example
+g
