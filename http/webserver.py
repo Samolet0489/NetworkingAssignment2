@@ -28,42 +28,49 @@
 # NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 # EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+# Needed imports
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
+# Define a custom HTTP server class which inherits from BaseHTTPRequestHandler class
 class CustomHttpServer(BaseHTTPRequestHandler):
     def do_GET(self):
         """
         Handling of GET requests
         :return:
         """
-        # print(f"Received GET request for {self.path}")
+        # Check the requested path
         if self.path == '/example':
-            with open('example.html', 'rb') as file:  # Corrected file path
-                self.send_response(200)
-                self.send_header('Content-type', 'text/html')
-                self.end_headers()
-                self.wfile.write(file.read())
-                # print("Served example.html")
+            # If the path is '/example', serve example.html
+            with open('example.html', 'rb') as file:  # Open the HTML file in binary read mode
+                self.send_response(200)  # Send a 200 OK response
+                self.send_header('Content-type', 'text/html')  # Set the content type as HTML
+                self.end_headers()  # End the HTTP headers
+                self.wfile.write(file.read())  # Write the content of the file to the response
+
+        # If the path is not '/example'
         else:
             try:
-                page = open(self.path[1:], 'rb')
-                self.send_response(200)
-                self.send_header('Content-type', 'text/html')
-                self.end_headers()
-                self.wfile.write(page.read())
-                # print(f"Served {self.path[1:]}")
-            except OSError:
-                self.send_error(404, 'Not found')
-                # print(f"File not found: {self.path[1:]}")
+                page = open(self.path[1:], 'rb')  # Try to open the requested file by removing the leading '/'
+                self.send_response(200)  # Send a 200 OK response
+                self.send_header('Content-type', 'text/html')  # Set the content type as HTML
+                self.end_headers()  # End the HTTP headers
+                self.wfile.write(page.read())  # Write the content of the file to the response
 
+            except OSError:
+                # If the file is not found, send a 404 Not Found response
+                self.send_error(404, 'Not found')
+
+
+# Entry point of the script
 if __name__ == "__main__":
+    # Create an instance of HTTPServer listening on localhost 127.0.0.1 and port 80
     ws = HTTPServer(("127.0.0.1", 80), CustomHttpServer)
-    print("Started server on port 80")
+    print("Started server on port 80")  # Print a message indicating that the server has started
 
     try:
-        ws.serve_forever()
+        ws.serve_forever()  # Start serving requests indefinitely
     except KeyboardInterrupt:
-        pass
+        pass  # Handle KeyboardInterrupt (Ctrl+C) to stop the server
 
-    ws.server_close()
+    ws.server_close()  # Close the server when done
