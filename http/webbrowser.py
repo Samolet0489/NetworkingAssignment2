@@ -1,4 +1,8 @@
 
+#---------------------------------------------------------
+# GROUP MEMBERS: Alexander Savov and Balazs Csaba Madarasi
+#---------------------------------------------------------
+
 # Needed imports
 import sys
 from connection_helper import create_connection  # Import the create_connection function from connection_helper module

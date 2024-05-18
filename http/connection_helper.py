@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # This module defines general functions for establishing an arbitrary TCP connection with a remote host
 
+#---------------------------------------------------------
+# GROUP MEMBERS: Alexander Savov and Balazs Csaba Madarasi
+#---------------------------------------------------------
+
 # Needed imports
 import socket
 import ssl
